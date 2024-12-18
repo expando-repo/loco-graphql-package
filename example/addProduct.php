@@ -26,15 +26,12 @@
             'identifier' => $_POST['identifier'],
             'code' => $_POST['code'],
             'imageIdentifier' => ($_POST['images'][0] ?? null ? md5($_POST['images'][0]) : null),
-            'translations' => [
-                [
-                    'language' => 'cs_CZ',
-                    'title' => $_POST['product_title'],
-                    'description' => $_POST['product_description'],
-                    'description2' => $_POST['product_description2'] ?? null,
-                    'seoTitle' => $_POST['product_seo_title'] ?? null,
-                    'seoDescription' => $_POST['product_seo_description'] ?? null,
-                ]
+            'sourceText' => [
+                'title' => $_POST['product_title'],
+                'description' => $_POST['product_description'],
+                'description2' => $_POST['product_description2'] ?? null,
+                'seoTitle' => $_POST['product_seo_title'] ?? null,
+                'seoDescription' => $_POST['product_seo_description'] ?? null,
             ],
             'sourceUrl' => $_POST['url'] ?? null,
         ];
@@ -44,13 +41,10 @@
                 $product['brands'][] = [
                     'brand' => $brand,
                     'identifier' => ($_POST['brand_identifier'][$k] ?: md5($brand)),
-                    'translations' => [
-                        [
-                            'language' => 'cs_CZ',
-                            'seoTitle' => ($_POST['brand_seo_title'][$k] ?? null),
-                            'seoDescription' => ($_POST['brand_seo_description'][$k] ?? null),
-                            'seoKeywords' => ($_POST['brand_seo_keywords'][$k] ?? null),
-                        ]
+                    'sourceText' => [
+                        'seoTitle' => ($_POST['brand_seo_title'][$k] ?? null),
+                        'seoDescription' => ($_POST['brand_seo_description'][$k] ?? null),
+                        'seoKeywords' => ($_POST['brand_seo_keywords'][$k] ?? null),
                     ],
                 ];
             }
@@ -61,15 +55,12 @@
             if ($tag) {
                 $product['tags'][] = [
                     'identifier' => ($_POST['tag_identifier'][$k] ?: md5($tag)),
-                    'translations' => [
-                        [
-                            'language' => 'cs_CZ',
-                            'name' => $tag,
-                            'description' => ($_POST['tag_description'][$k] ?? null),
-                            'seoTitle' => ($_POST['tag_seo_title'][$k] ?? null),
-                            'seoDescription' => ($_POST['tag_seo_description'][$k] ?? null),
-                            'seoKeywords' => ($_POST['tag_seo_keywords'][$k] ?? null),
-                        ]
+                    'sourceText' => [
+                        'name' => $tag,
+                        'description' => ($_POST['tag_description'][$k] ?? null),
+                        'seoTitle' => ($_POST['tag_seo_title'][$k] ?? null),
+                        'seoDescription' => ($_POST['tag_seo_description'][$k] ?? null),
+                        'seoKeywords' => ($_POST['tag_seo_keywords'][$k] ?? null),
                     ],
                 ];
             }
@@ -82,11 +73,8 @@
                 $product['images'][] = [
                     'identifier' => md5($url),
                     'src' => $url,
-                    'translations' => [
-                        [
-                            'language' => 'cs_CZ',
-                            'alt' => ($_POST['image_alt'][$k] ?? null),
-                        ]
+                    'sourceText' => [
+                        'alt' => ($_POST['image_alt'][$k] ?? null),
                     ],
                 ];
             }
@@ -96,14 +84,11 @@
             if ($value) {
                 $product['categories'][] = [
                     'identifier' => $_POST['category_identifier'][$k] ?: md5($value),
-                    'translations' => [
-                        [
-                            'language' => 'cs_CZ',
-                            'title' => $value,
-                            'seoTitle' => ($_POST['category_seo_title'][$k] ?? null),
-                            'seoDescription' => ($_POST['category_seo_description'][$k] ?? null),
-                            'seoKeywords' => ($_POST['category_seo_keywords'][$k] ?? null),
-                        ]
+                    'sourceText' => [
+                        'title' => $value,
+                        'seoTitle' => ($_POST['category_seo_title'][$k] ?? null),
+                        'seoDescription' => ($_POST['category_seo_description'][$k] ?? null),
+                        'seoKeywords' => ($_POST['category_seo_keywords'][$k] ?? null),
                     ],
                 ];
             }
@@ -120,12 +105,9 @@
                     'price' => (float) $value['price'],
                     'ean' => $value['ean'],
                     'imageIdentifier' => md5($value['image']),
-                    'translations' => [
-                        [
-                            'language' => 'cs_CZ',
-                            'title' => $value['title'],
-                            'description' => ($value['description']),
-                        ]
+                    'sourceText' => [
+                        'title' => $value['title'],
+                        'description' => ($value['description']),
                     ],
                 ];
 
@@ -133,20 +115,14 @@
                     if ($option['name'] && $option['value']) {
                         $variant['options'][] = [
                             'identifier' => (($option['identifier'] ?? null) ?: md5($option['name'])),
-                            'translations' => [
-                                [
-                                    'language' => 'cs_CZ',
-                                    'name' => $option['name'],
-                                ]
+                            'sourceText' => [
+                                'name' => $option['name'],
                             ],
                             'values' => [
                                 [
                                     'identifier' => (($option['identifier_value'] ?? null) ?: md5($option['value'])),
-                                    'translations' => [
-                                        [
-                                            'language' => 'cs_CZ',
-                                            'name' => $option['value'],
-                                        ]
+                                    'sourceText' => [
+                                        'name' => $option['value'],
                                     ],
                                 ]
                             ]
