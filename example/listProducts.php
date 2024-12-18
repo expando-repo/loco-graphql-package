@@ -34,7 +34,7 @@
                                 code
                                 url
                                 imageId
-                                translations {
+                                translation {
                                   language
                                   title
                                 }
