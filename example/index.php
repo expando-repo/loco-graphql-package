@@ -25,7 +25,9 @@
         <li><a href="listProducts.php">list products</a></li>
         <li></li>
         <li><a href="addArticle.php">add/update article</a></li>
-        <li></li>
+        <li><a href="listArticles.php">list article</a></li>
+        <li><a href="addCustomContent.php">add/update custom content</a></li>
+        <li><a href="listCustomContents.php">list custom content</a></li>
         <li><a href="logout.php">logout (delete token)</a></li>
     </ul>
 <?php } ?>

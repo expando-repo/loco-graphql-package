@@ -38,13 +38,14 @@ class Login
      */
     public function getToken(): ?array
     {
-        $provider = new GenericProvider([
+        $provider = new OwnGenericProvider([
             'clientId'                => $this->clientId,    // The client ID assigned to you by the provider
             'clientSecret'            => $this->clientSecret,    // The client password assigned to you by the provider
             'redirectUri'             => $this->redirectUri,
             'urlAuthorize'            => $this->url . '/oauth/authorize',
             'urlAccessToken'          => $this->url . '/oauth/token',
             'urlResourceOwnerDetails' => '',
+            'verify' => false,
         ]);
 
         $code = $_GET['code'] ?? null;

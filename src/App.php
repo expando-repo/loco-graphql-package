@@ -136,7 +136,8 @@ class App
                 'headers' => [
                     'Content-Type' => 'application/json',
                     'Authorization' => 'Bearer ' . $this->access_token
-                ]
+                ],
+                'verify' => false,
             ]);
             $response = $client->post("api/graphql", [
                 'body' => json_encode($payload)
