@@ -149,7 +149,18 @@ class App
         }
 
         if (isset($arrayResponse['errors'])) {
-            throw new AppException($arrayResponse['errors'][0]['message'] ?? 'Error');
+            $messages = [];
+            foreach ($arrayResponse['errors'] as $error) {
+                $message = $error['message'] . " (";
+                foreach ($error['extensions']['validation'] as $key => $validations) {
+                    foreach ($validations as $validation) {
+                        $message .= $key . ': ' . $validation . ", ";
+                    }
+                }
+                $message .= ")";
+                $messages[] = $message;
+            }
+            throw new AppException(implode("; ", $messages));
         }
 
         return $arrayResponse;
